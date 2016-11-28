@@ -51,7 +51,7 @@ module Telegram
     #
     # @see EventType
     # @since [0.1.0]
-    attr_accessor :on, :auth_properties
+    attr_accessor :on, :auth_properties, :confirm_failure_callback
 
     # Initialize Telegram Client
     #
@@ -197,6 +197,7 @@ module Telegram
     private
 
     def execution_failed(e)
+	  @confirm_failure_callback.call
       logger.error("Failed execution of telegram-cli: #{e}")
       close_stdout
     end
